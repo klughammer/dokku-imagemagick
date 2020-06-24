@@ -10,7 +10,7 @@ dokku_log_info1 "Installing ImageMagick..."
 
 CMD="command -v identify >/dev/null 2>&1 && \
   dpkg -s imagemagick > /dev/null 2>&1 || \
-  (apt-get update && apt-get install -y imagemagick && apt-get clean)"
+  (apt-get update && apt-get install -y imagemagick && apt-get clean && curl https://raw.githubusercontent.com/klughammer/dokku-imagemagick/master/policy.xml -o /etc/ImageMagick-6/policy.xml)"
 
 ID=$(docker run -d $IMAGE /bin/bash -c "$CMD")
 test $(docker wait $ID) -eq 0
